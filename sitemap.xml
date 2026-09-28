@@ -1,0 +1,12 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- for p in site.html_pages -%}
+{%- unless p.sitemap == false or p.url == "/404.html" -%}
+<url><loc>{{ site.site_url }}{{ p.url | replace: "index.html", "" }}</loc><lastmod>{{ today }}</lastmod></url>
+{%- endunless -%}
+{%- endfor %}
+</urlset>

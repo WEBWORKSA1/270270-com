@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://270270.com/sitemap.xml

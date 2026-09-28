@@ -1,0 +1,72 @@
+---
+layout: default
+---
+{%- assign D = site.data.numbers -%}
+{%- assign ent = D.entries | where: "code", page.code | first -%}
+{%- assign code = ent.code -%}
+{%- assign r = "../" -%}
+{%- case ent.cat -%}{%- when "love" -%}{%- assign catl = "Love & romance" -%}{%- when "money" -%}{%- assign catl = "Money & prosperity" -%}{%- when "slang" -%}{%- assign catl = "Internet slang" -%}{%- when "caution" -%}{%- assign catl = "Unlucky / use with care" -%}{%- when "culture" -%}{%- assign catl = "Culture & society" -%}{%- else -%}{%- assign catl = "Single digit" -%}{%- endcase -%}
+{%- case ent.tone -%}{%- when "lucky" -%}{%- assign tonel = "Lucky" -%}{%- when "neutral" -%}{%- assign tonel = "Neutral" -%}{%- when "caution" -%}{%- assign tonel = "Caution" -%}{%- else -%}{%- assign tonel = "Rude: avoid" -%}{%- endcase -%}
+{%- assign q1 = "What does " | append: code | append: " mean in Chinese?" -%}
+{%- assign a1 = code | append: " reads as " | append: ent.hanzi | append: " (" | append: ent.pinyin | append: "). " | append: ent.en -%}
+{%- assign q2 = "Is " | append: code | append: " a lucky number?" -%}
+{%- case ent.tone -%}
+{%- when "lucky" -%}{%- assign a2 = "Yes. " | append: code | append: " is generally considered lucky or positive in Chinese culture." -%}
+{%- when "neutral" -%}{%- assign a2 = code | append: " is mostly neutral: its meaning depends on context rather than luck." -%}
+{%- when "caution" -%}{%- assign a2 = code | append: ' is generally considered unlucky or negative, mainly because of the digit 4 (四, sounding like 死 "death") or a negative phrase.' -%}
+{%- else -%}{%- assign a2 = "No. " | append: code | append: " carries a rude or insulting meaning. Avoid it in gifts, prices and plates." -%}
+{%- endcase -%}
+{%- assign q3 = "Can I use " | append: code | append: " in a phone number, price or licence plate?" -%}
+{%- assign a3 = "Use our free Number Decoder to score the full number. Endings matter most, and combinations with 8 (发, prosperity) raise the score while 4 (死) lowers it." -%}
+{%- assign codelen = code | size -%}
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":{{ q1 | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ a1 | jsonify }}}},{"@type":"Question","name":{{ q2 | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ a2 | jsonify }}}},{"@type":"Question","name":{{ q3 | jsonify }},"acceptedAnswer":{"@type":"Answer","text":{{ a3 | jsonify }}}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{ site.site_url }}/"},{"@type":"ListItem","position":2,"name":"Dictionary","item":"{{ site.site_url }}/dictionary.html"},{"@type":"ListItem","position":3,"name":{{ code | jsonify }},"item":"{{ site.site_url }}/n/{{ code }}.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"DefinedTerm","name":{{ code | jsonify }},"alternateName":{{ ent.hanzi | jsonify }},"description":{{ ent.en | jsonify }},"inDefinedTermSet":"{{ site.site_url }}/dictionary.html"}</script>
+<section class="section-sm"><div class="container">
+<nav class="breadcrumb" aria-label="Breadcrumb"><a href="{{ r }}index.html">Home</a> › <a href="{{ r }}dictionary.html">Dictionary</a> › {{ code }}</nav>
+<div class="layout-side"><div>
+<span class="eyebrow">{{ catl | escape }}</span>
+<div class="bignum"><div class="n">{{ code }}</div><div><div class="h">{{ ent.hanzi | escape }}</div><div class="muted">{{ ent.pinyin | escape }}</div></div></div>
+<p class="lead" style="margin-top:14px">{{ ent.en | escape }}</p>
+<p><span class="pill {{ ent.tone }}">{{ tonel }}</span> <span class="pill">{{ catl | escape }}</span></p>
+<h2 style="margin-top:28px">What does {{ code }} mean in Chinese?</h2>
+<p>In Mandarin, <b>{{ code }}</b> is read <i>{{ ent.pinyin | escape }}</i>{% if ent.cat != "digit" and codelen > 1 %}, and it sounds like <span class="han">{{ ent.hanzi | escape }}</span>{% endif %}. {{ ent.en | escape }} Chinese speakers use numbers like this because most digits sound like everyday words. That is why number meanings shape prices, phone numbers, car plates, wedding dates and even building floors.</p>
+<h2>Digit-by-digit breakdown</h2>
+<div class="table-wrap"><table><thead><tr><th>Digit</th><th>汉字</th><th>Pinyin</th><th>Sounds like</th><th>Meaning</th></tr></thead><tbody>
+{%- assign chars = code | split: "" -%}
+{%- for c in chars -%}{%- assign dg = D.digits[c] -%}
+<tr><td><b style="font-size:1.2rem">{{ c }}</b></td><td class="han" style="color:var(--red)">{{ dg.hanzi }}</td><td>{{ dg.pinyin }}<br><span class="muted small">Cantonese: {{ dg.cant }}</span></td><td class="small">{{ dg.sounds | join: "; " | escape }}</td><td class="small">{{ dg.mean | escape }}</td></tr>
+{%- endfor -%}
+</tbody></table></div>
+</div>
+<aside><div class="sticky"><div class="card"><h3>Live luck score</h3><div data-decoder data-value="{{ code }}"><form><label for="dec-side" class="sr-only">Number</label><input id="dec-side" class="num-input" inputmode="numeric" value="{{ code }}" style="font-size:1.5rem"></form><div class="seg" role="group" aria-label="Dialect"><button type="button" data-dialect="m">Mandarin</button><button type="button" data-dialect="c">Cantonese</button></div><div class="result"></div></div></div>
+<div class="ad-slot" data-slot="sidebar" style="margin-top:40px"></div></div></aside>
+</div></div></section>
+<div class="container"><div class="ad-slot" data-slot="inArticle"></div></div>
+<section class="section-sm"><div class="container" style="max-width:860px">
+<h2>How to use {{ code }}</h2>
+<ul>
+<li><b>In chat and social media:</b> {% if ent.cat == "love" or ent.cat == "slang" %}number codes are quick, playful and a little secret. Type it where you would type the phrase.{% else %}it's recognised instantly by Chinese speakers, so context is everything.{% endif %}</li>
+<li><b>In business:</b> {% if ent.tone == "lucky" %}it is a strong ending for prices, phone numbers and promo codes aimed at Chinese customers.{% elsif ent.tone == "caution" or ent.tone == "rude" %}keep it away from prices, product codes and phone numbers aimed at Chinese customers.{% else %}it's neutral, so pair it with 8 or 6 to add a prosperous feel.{% endif %}</li>
+<li><b>As a gift amount:</b> {% if ent.tone == "lucky" and ent.cat == "love" or ent.tone == "lucky" and ent.cat == "money" %}a thoughtful choice for red envelopes (hongbao).{% else %}choose even amounts with 6, 8 or 9 (e.g. 88, 168, 888) instead.{% endif %}</li>
+</ul>
+<h2>Frequently asked questions</h2>
+<details class="faq"><summary>{{ q1 | escape }}</summary><p>{{ a1 | escape }}</p></details>
+<details class="faq"><summary>{{ q2 | escape }}</summary><p>{{ a2 | escape }}</p></details>
+<details class="faq"><summary>{{ q3 | escape }}</summary><p>{{ a3 | escape }}</p></details>
+<h2 style="margin-top:28px">Related numbers</h2><div class="chips">
+{%- assign shown = 0 -%}
+{%- for x in D.entries -%}
+{%- if shown >= 10 -%}{%- break -%}{%- endif -%}
+{%- if x.code == code -%}{%- continue -%}{%- endif -%}
+{%- assign xlen = x.code | size -%}
+{%- assign rel = false -%}
+{%- if x.cat == ent.cat -%}{%- assign rel = true -%}{%- endif -%}
+{%- if codelen > 1 and code contains x.code -%}{%- assign rel = true -%}{%- endif -%}
+{%- if xlen > 1 and x.code contains code -%}{%- assign rel = true -%}{%- endif -%}
+{%- if rel -%}{%- assign hz = x.hanzi | split: " / " | first -%}<a class="chip" href="{{ x.code }}.html">{{ x.code }} · {{ hz | escape }}</a>{%- assign shown = shown | plus: 1 -%}{%- endif -%}
+{%- endfor -%}
+<a class="chip" href="{{ r }}dictionary.html">Full dictionary →</a></div>
+<div class="cta-band" style="margin-top:36px"><h2>Choosing a number that matters?</h2><p>Phone numbers, plates, prices, addresses, launch dates: get a human expert's audit for the Chinese market.</p><div class="chips"><a class="btn btn-gold" href="{{ r }}business.html?n={{ code }}#audit">Get an audit</a> <a class="btn btn-ghost" href="{{ r }}decoder.html?n={{ code }}">Open in Decoder</a></div></div>
+</div></section>
+<div class="container"><div class="ad-slot" data-slot="footer"></div></div>

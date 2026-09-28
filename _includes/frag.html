@@ -1,10 +1,16 @@
-{%- comment -%}Renders a page fragment from tools/pages: fills {R}, {CONTACT}, {TODAY} and {AD:slot} placeholders.{%- endcomment -%}
+{%- comment -%}Renders a page fragment from tools/pages: fills the R, CONTACT, TODAY and AD placeholders.{%- endcomment -%}
 {%- assign r = page.r | default: "" -%}
 {%- assign today = site.time | date: "%Y-%m-%d" -%}
+{%- capture ph_r -%}{R}{%- endcapture -%}
+{%- capture ph_c -%}{CONTACT}{%- endcapture -%}
+{%- capture ph_t -%}{TODAY}{%- endcapture -%}
+{%- capture ph_a1 -%}{AD:top}{%- endcapture -%}
+{%- capture ph_a2 -%}{AD:inArticle}{%- endcapture -%}
+{%- capture ph_a3 -%}{AD:footer}{%- endcapture -%}
 {%- assign ad1 = '<div class="container"><div class="ad-slot" data-slot="top"></div></div>' -%}
 {%- assign ad2 = '<div class="container"><div class="ad-slot" data-slot="inArticle"></div></div>' -%}
 {%- assign ad3 = '<div class="container"><div class="ad-slot" data-slot="footer"></div></div>' -%}
 {%- assign body = include.src | split: "-->" -%}
 {%- assign meta_len = body[0] | size | plus: 3 -%}
 {%- assign out = include.src | slice: meta_len, 1000000 -%}
-{{ out | replace: "{R}", r | replace: "{CONTACT}", site.contact_url | replace: "{TODAY}", today | replace: "{AD:top}", ad1 | replace: "{AD:inArticle}", ad2 | replace: "{AD:footer}", ad3 }}
+{{ out | replace: ph_r, r | replace: ph_c, site.contact_url | replace: ph_t, today | replace: ph_a1, ad1 | replace: ph_a2, ad2 | replace: ph_a3, ad3 }}

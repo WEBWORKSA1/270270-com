@@ -1,14 +1,13 @@
 # 270270 Number Lab: Jekyll config (GitHub Pages builds this automatically, free plan)
 title: 270270 Number Lab
-site_url: https://270270.com        # canonical domain used in canonical/OG/sitemap
+site_url: https://270270.com
 contact_url: https://web.works/contact
-adsense_client: ""                   # e.g. ca-pub-1234567890123456 (also set in assets/js/config.js)
-ga4_id: ""                           # optional Google Analytics 4 ID
-og_image: ""                         # optional absolute URL of a 1200x630 social image
+adsense_client: ""
+ga4_id: ""
+og_image: ""
 exclude:
   - README.md
   - docs
-  - tools/pages
   - tools/og.py
   - tools/build.py
   - tools/make_stubs.py

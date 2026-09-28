@@ -1,0 +1,55 @@
+<!--META {"title":"Chinese Number Decoder: Lucky Number Checker for Phone, Plate & Price","desc":"Free Chinese lucky number checker. Enter any phone number, licence plate, price, address or date to reveal hidden Chinese phrases, digit meanings and a 1–99 luck score (Mandarin & Cantonese).","priority":"0.9","exit":true} -->
+<section class="section-sm"><div class="container">
+<nav class="breadcrumb"><a href="index.html">Home</a> › Number Decoder</nav>
+<div class="layout-side"><div>
+<span class="eyebrow">Tool · 数字解码</span>
+<h1>Chinese Number Decoder</h1>
+<p class="lead">Reveal the hidden phrases, digit-by-digit meanings and the luck score of any number, the way a Chinese speaker hears it.</p>
+<div class="decoder" data-decoder data-sync-url style="margin-top:18px">
+<div class="seg" role="group" aria-label="Number type" style="margin-bottom:12px">
+<button type="button" data-mode="any" aria-pressed="true" data-ph="Any number">Any</button>
+<button type="button" data-mode="phone" aria-pressed="false" data-ph="e.g. 416 888 1688">Phone</button>
+<button type="button" data-mode="plate" aria-pressed="false" data-ph="e.g. 8828">Car plate</button>
+<button type="button" data-mode="price" aria-pressed="false" data-ph="e.g. 168">Price</button>
+<button type="button" data-mode="address" aria-pressed="false" data-ph="e.g. 1808">Address / unit</button>
+<button type="button" data-mode="date" aria-pressed="false" data-ph="e.g. 20270808">Date</button>
+</div>
+<form role="search"><label for="dec-main">Enter a number (spaces, dashes and symbols are ignored)</label>
+<input id="dec-main" class="num-input" inputmode="numeric" autocomplete="off" placeholder="Any number" value="270270"></form>
+<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+<div class="seg" role="group" aria-label="Dialect"><button type="button" data-dialect="m">Mandarin</button><button type="button" data-dialect="c">Cantonese</button></div>
+<div class="chips"><button class="chip" data-try="270270">270270</button><button class="chip" data-try="5201314">5201314</button><button class="chip" data-try="168">168</button><button class="chip" data-try="13888881688">Phone</button><button class="chip" data-try="748">748</button><button class="chip" data-try="4444">4444</button></div>
+</div>
+<div class="result"></div>
+</div>
+
+{AD:top}
+
+<div class="card" style="margin-top:20px"><h3>Embed this decoder on your site</h3><p class="small muted">Free for blogs, schools and communities. Please keep the attribution link.</p><code class="embed" id="embed-code"></code><button class="btn btn-sm btn-ghost" data-copy-embed style="margin-top:8px">Copy embed code</button></div>
+
+<div class="article" style="margin:36px 0 0;max-width:none">
+<h2>How the luck score works</h2>
+<p>Every digit in Chinese has a sound, and many sounds match lucky or unlucky words. Our engine does four things:</p>
+<ol>
+<li><b>Finds hidden phrases</b> first, longest match wins: <a href="n/5201314.html">5201314</a> beats 520 + 1314, and <a href="n/748.html">748</a> is caught before its single digits.</li>
+<li><b>Weighs the remaining digits</b>: 8 (<span class="han">发</span>) +, 6 and 9 +, 2 and 3 slightly +, 4 (<span class="han">死</span>) strongly −.</li>
+<li><b>Rewards patterns</b>: mirrors like 270·270 (<span class="han">好事成双</span>), solid runs (8888), rising sequences (<span class="han">步步高升</span>) and lucky endings.</li>
+<li><b>Switches dialect</b>: in Cantonese, 5 means "not", so 58 means "won't prosper" and 54 means "won't die". 7 also carries a vulgar slang sound.</li>
+</ol>
+<p class="callout">Scores are for cultural entertainment and education, not financial, legal or spiritual advice. Families, regions and dialects differ. When it really matters, <a href="business.html#audit">ask a human expert</a>.</p>
+<h2>Tips by number type</h2>
+<div class="grid g2">
+<div class="card"><h3>📱 Phone numbers</h3><p class="small">The last 4 digits carry the most weight. 8888, 1688, 5188 and 6688 are premium; avoid 4, 14, 44 and 748 endings.</p></div>
+<div class="card"><h3>🚗 Car plates</h3><p class="small">Shorter is better. 8, 18, 28 and 88 are coveted, which is why HK plate auctions reach millions.</p></div>
+<div class="card"><h3>🏷️ Prices</h3><p class="small">Swap .99 endings for 8s: $88, $168, $888. Never price a gift at 250. Try the <a href="tools.html#price">Lucky Price Finder</a>.</p></div>
+<div class="card"><h3>🏢 Addresses & floors</h3><p class="small">Many buildings skip floors 4, 13, 14 and 24. Units ending in 8 often sell at a premium to Chinese buyers.</p></div>
+</div>
+</div>
+</div>
+<aside><div class="sticky">
+<div class="card"><h3>Need a number that's truly lucky?</h3><p class="small muted">We source and broker premium lucky phone numbers, vanity numbers and numeric domains.</p><a class="btn btn-primary btn-block" href="business.html#premium">Inquire about premium numbers</a></div>
+<div class="ad-slot" data-slot="sidebar" style="margin-top:40px;min-height:250px"></div>
+<div class="card" style="margin-top:16px"><h3>Popular lookups</h3><div class="chips"><a class="chip" href="n/888.html">888</a><a class="chip" href="n/168.html">168</a><a class="chip" href="n/520.html">520</a><a class="chip" href="n/1314.html">1314</a><a class="chip" href="n/666.html">666</a><a class="chip" href="n/250.html">250</a><a class="chip" href="n/4.html">4</a><a class="chip" href="n/14.html">14</a></div></div>
+</div></aside>
+</div></div></section>
+{AD:footer}
